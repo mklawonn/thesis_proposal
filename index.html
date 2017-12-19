@@ -174,7 +174,7 @@
                         </ul></small>
                         <li>Discussion and Summary</li>
                     </ul>
-                    <aside class="notes">First I'll talk about scene graph generation, where my current work has mostly been focused. I'll then talk about potential provenance generation methods and show a proof of concept.</aside>
+                    <aside class="notes">First I'll talk about scene graph generation, where my current work has mostly been focused. I'll then talk about potential provenance generation methods and show a proof of concept new approach based on graph Fourier transforms.</aside>
                 </section>
 
                 <section>
@@ -568,7 +568,7 @@
 
                     <section>
                         <h2>Using Graph Fourier Transforms</h2>
-                        <p>Graph Fourier Tranforms:</p>
+                        <p>Since the activations of a deep model are essentially a signal on a graph, we turn to graph fourier transforms. Graph Fourier Tranforms:</p>
                         <ul>
                             <li>Decompose the signal on a particular node in terms of eigenvectors and eigenvalues (graph spectra)</li>
                             <li>Offer a means of filtering out low frequency features of the graph</li>
@@ -580,8 +580,8 @@
                     <section>
                         <h3>From GFT to Human Recognizable Features</h3>
                         <ul>
-                            <li>Train a deep network on a dataset where inputs have attributes</li>
-                            <li>Compute GFT</li>
+                            <li>Train a deep network on a (classification) dataset where inputs have attributes</li>
+                            <li>Compute GFT for the model's state after a forward pass on an input image</li>
                             <li>Filter undesirable eigenvectors</li>
                             <li>Compute Inverse GFT for penultimate Layer</li>
                             <li>Create attribute-activation pair, where activations are the filtered penultimate activations</li>

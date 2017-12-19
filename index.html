@@ -63,7 +63,8 @@
                 <section>
                     <section>
                         <h3>Information Retrieval from Images</h3>
-                        <img style="height:400px" src="images/number_of_images.png"/>
+                        <p>The increase in availability of images has led to a number of challenges and datasets for computer vision.</p>
+                        <img style="height:350px" src="images/number_of_images.png"/>
                         <p><small>Image courtesy of Business Insider showing increase in web images.</small></p>
                         <aside class="notes">__</aside>
                     </section>
@@ -100,7 +101,7 @@
                                 <span class="fragment">
                                     <p><b>Perception</b></p> 
                                     <p>Extract information immediately available from the image.</p>
-                                    <p>Example: What are the people doing?</p>
+                                    <p>Example: Are there people in the image?</p>
                                 </span>
                                 <span class="fragment">
                                     <p><b>Reasoning</b></p> 
@@ -117,7 +118,19 @@
                     <section>
                         <h2>Bridging the Gap</h2>
                         <img src="images/bridging_the_gap_1.png"/>
-                        <aside class="notes">Currently perception and reasoning are separated, perception being where we are, and reasoning being where I want to go. I argue that the tasks, models, and data that currently comprise learning perceptual models in computer vision are not currently interoperable with the </aside>
+                        <aside class="notes">Currently perception and reasoning are separated, perception being where we are, and reasoning being where I want to go. I argue that the tasks, models, and data that currently comprise learning perceptual models in computer vision are not currently interoperable with the technologies on the reasoning side.</aside>
+                    </section>
+
+                    <section>
+                        <h2>Tbox and Abox</h2>
+                        <p>Reasoning systems can be thought of in terms of a <i>Tbox</i>, <i>Abox</i>, and <i>Reasoner</i>. <span class="fragment">I am proposing to generate an Abox for use in a reasoning system.</span> </p>
+                        <aside class="notes">The tbox refers to a terminology that defines concepts and also rules associated with concepts. The abox contains assertions that have been made about instances of the concepts in a tbox. With this in mind, we are trying to construct a proper Abox for a reasoning system.</aside>
+                    </section>
+
+                    <section>
+                        <h2>Tbox and Abox</h2>
+                        <img style="height:450px;" src="images/tbox_abox.png" />
+                        <p><small>The difference between a tbox and abox</small></p>
                     </section>
 
                     <section>
@@ -126,18 +139,11 @@
                         <aside class="notes">__</aside>
                     </section>
 
-                    <section>
-                        <h2>Tbox and Abox</h2>
-                        <p>Reasoning systems can be thought of in terms of a <i>Tbox</i>, <i>Abox</i>, and <i>Reasoner</i>. <span class="fragment">We are proposing to generate an Abox for use in a reasoning system.</span> </p>
-                        <img style="height:350px;" src="images/tbox_abox.png" />
-                        <p><small>The difference between a tbox and abox</small></p>
-                        <aside class="notes">The tbox refers to a terminology that defines concepts and rules associated with concepts. The abox contains assertions that have been made about instances of the concepts in a tbox. With this in mind, we are trying to construct a proper Abox for a reasoning system.</aside>
-                    </section>
-
+                    
                     <section>
                         <h3>Necessary Condition 1:</h3>
                         <h5>Graph Structured Representation</h5>
-                        <p>Assertions in an Abox are represented as <i>triples</i> (De et Al 1996, Lassila et Al 1999). <span class="fragment">Triples are subject-predicate-object statements about semantic data.</span> <span class="fragment">A collection of triples naturally forms a graph when subjects and objects are shared amongst statements.</span> <span class="fragment">(Stokman et Al 1988) was among the first to suggest representing knowledge in graphical form due to its clear structure and access to graph theoretical tools.</span> <span class="fragment">Thus we propose to produce graphical outputs from images to form an Abox.</span></p>
+                        <p>Assertions in an Abox are represented as <i>triples</i> (De et Al 1996, Lassila et Al 1999). <span class="fragment">Triples are subject-predicate-object statements about semantic data.</span> <span class="fragment">A collection of triples naturally forms a graph when subjects and objects are shared amongst statements.</span> <span class="fragment">(Stokman et Al 1988) was among the first to suggest representing knowledge in graphical form due to its clear structure and access to graph theoretical tools.</span> <span class="fragment">Thus I propose to produce graphical outputs from images to form an Abox.</span></p>
                         <aside class="notes">This is the first necessary condition for perceptual output to be used with </aside>
                     </section>
 
@@ -301,7 +307,7 @@
 
                     <section>
                         <h2>Results: Measuring Performance</h2>
-                        <p>Methods are evaluated using a recall at k metric (proposed in xuetal2017, higher is better): <br/><br/> $\frac{\left| \mbox{k Generated Triples } \cap \mbox{ Ground Truth Triples} \right|}{\left|\mbox{Ground Truth Triples}\right|}$</p>
+                        <p>Methods are evaluated using a recall at k metric (proposed in (Xu et Al 2017), higher is better): <br/><br/> $\frac{\left| \mbox{k Generated Triples } \cap \mbox{ Ground Truth Triples} \right|}{\left|\mbox{Ground Truth Triples}\right|}$</p>
                         <aside class="notes">The reasoning behind using recall instead of precision is that recall does not penalize for correct triples that do not appear in the ground truth. This is beneficial since none of the images in a dataset are likely to be fully annotated.</aside>
                     </section>
 
@@ -347,15 +353,7 @@
                                     
                                 </tr>
 
-                                <tr>
-                                    <td>(Xang et Al 2017)</td>
-                                    <td>"Parallel Pairwise Recurrent Fully Convolutional Networks"</td>
-                                    <td class="fragment highlight-red">Yes</td>
-                                    <td class="fragment highlight-red">No</td>
-                                    <td class="fragment highlight-red">No</td>
-                                    <td class="fragment highlight-red">2.41</td>
-                                </tr>
-
+                                
                                 <tr>
                                     <td>(Xu et Al 2017)</td>
                                     <td>Iterative Message Passing</td>
@@ -403,6 +401,16 @@
                                     <td class="fragment highlight-green">Yes</td>
                                     <td class="fragment highlight-green">10.72</td>
                                 </tr>
+
+                                <tr>
+                                    <td>(Xang et Al 2017)</td>
+                                    <td>"Parallel Pairwise Recurrent Fully Convolutional Networks"</td>
+                                    <td class="fragment highlight-red">Yes</td>
+                                    <td class="fragment highlight-red">No</td>
+                                    <td class="fragment highlight-red">No</td>
+                                    <td class="fragment highlight-green">10.62</td>
+                                </tr>
+
 
                                 <tr>
                                     <td>(Newell et Al 2017)</td>
@@ -552,7 +560,7 @@
 
                     <section>
                         <h2>Analyzing Deep Models</h2>
-                        <p>We would like some way of analyzing nodes and groups of nodes to see if some of them map to human recognizable features. <span class="fragment">Learning a direct mapping from neuron activations to human recognizable features may be tricky because many features in deep models are clearly not human recognizable.</span></p>
+                        <p>I would like some way of analyzing nodes and groups of nodes to see if some of them map to human recognizable features. <span class="fragment">Learning a direct mapping from neuron activations to human recognizable features may be tricky because many features in deep models are clearly not human recognizable.</span></p>
                         <aside class="notes">We're looking to generate symbolic provenance</aside>
                     </section>
 
@@ -590,7 +598,7 @@
                     <section>
                         <h3>Current Implementation Details</h3>
                         <ul>
-                            <li>The deep model we analyze is a CNN with 3 convolutional layers and 2 f.c layers</li>
+                            <li>The deep model I analyze is a CNN with 3 convolutional layers and 2 f.c layers</li>
                             <li>I use multilabel KNN to map from activations to attribute vectors (K=5)</li>
                             <li>A little under 6300 train and test images each</li>
                             <li>64 named attributes</li>
@@ -599,7 +607,7 @@
 
                     <section>
                         <h2>Creating a Baseline</h2>
-                        <p>Because we are interested in comparing to how well the filtered version of neuron activations maps to attributes, the obvious comparison is to the unfiltered version, i.e the neuron activations prior to filtering.</p>
+                        <p>Because I am interested in comparing to how well the filtered version of neuron activations maps to attributes, the obvious comparison is to the unfiltered version, i.e the neuron activations prior to filtering.</p>
                     </section>
 
                     <section>

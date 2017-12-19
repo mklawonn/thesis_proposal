@@ -64,7 +64,7 @@
                     <section>
                         <h3>Information Retrieval from Images</h3>
                         <img style="height:400px" src="images/number_of_images.png"/>
-                        <p><small>Image courtesy of Business Insider</small></p>
+                        <p><small>Image courtesy of Business Insider showing increase in web images.</small></p>
                         <aside class="notes">__</aside>
                     </section>
 
@@ -111,7 +111,7 @@
                             <p><small>Image courtesy of <a href="http://windycityweddingdance.com/wedding-dance-lessons/mother-son-dance-lessons">WCWD</a></small></p>
                         </div>
 
-                        <aside class="notes">What if instead of listing objects, describing them in natural language, or asking a simple question answer that can be directly inferred from the image, you wanted something requiring more "reasoning"? Most current tasks are perceptive. Tasks that require reasoning could give you </aside>
+                        <aside class="notes">What if instead of listing objects, describing them in natural language, or asking a simple question answer that can be directly inferred from the image, you wanted something requiring more "reasoning"? Most current tasks are perceptive. Tasks that require reasoning could give you further insight into the content of an image, allow you to interpret images through the context of external knowledge, etc.</aside>
                     </section>
 
                     <section>
@@ -127,19 +127,24 @@
                     </section>
 
                     <section>
-                        <h2>Graph Structured Representation</h2>
-                        <p>stokman1988 argues for the structuring of knowledge in graph form for the following reasons, and thus I adopt this approach.</p>
-                        <ul>
-                            <li class="fragment">Ease of Representation</li>
-                            <li class="fragment">Clear Structure</li>
-                            <li class="fragment">Access to Graph Theoretical Tools</li>
-                        </ul>
-                        <aside class="notes">This is the most explored area of current work since the task of Scene Graph Generation was proposed. I define this task later and explain why, as it stands, it produces an output almost suitable for use with reasoning technologies. However, it's not quite ready for a reasoning system.</aside>
+                        <h2>Tbox and Abox</h2>
+                        <p>Reasoning systems can be thought of in terms of a <i>Tbox</i>, <i>Abox</i>, and <i>Reasoner</i>. <span class="fragment">We are proposing to generate an Abox for use in a reasoning system.</span> </p>
+                        <img style="height:350px;" src="images/tbox_abox.png" />
+                        <p><small>The difference between a tbox and abox</small></p>
+                        <aside class="notes">The tbox refers to a terminology that defines concepts and rules associated with concepts. The abox contains assertions that have been made about instances of the concepts in a tbox. With this in mind, we are trying to construct a proper Abox for a reasoning system.</aside>
                     </section>
 
                     <section>
-                        <h2>Provenance Included</h2>
-                        <p>Prior work (e.g cite mcguinness, cite lime) argues that trust is critical for the deployment of perceptual and reasoning models alike. <span class="fragment">As such I propose to build on previous work in machine learning explainability to capture an increased amount of provenance for a perceptual model's prediction.</span></p>
+                        <h3>Necessary Condition 1:</h3>
+                        <h5>Graph Structured Representation</h5>
+                        <p>Assertions in an Abox are represented as <i>triples</i> (De et Al 1996, Lassila et Al 1999). <span class="fragment">Triples are subject-predicate-object statements about semantic data.</span> <span class="fragment">A collection of triples naturally forms a graph when subjects and objects are shared amongst statements.</span> <span class="fragment">(Stokman et Al 1988) was among the first to suggest representing knowledge in graphical form due to its clear structure and access to graph theoretical tools.</span> <span class="fragment">Thus we propose to produce graphical outputs from images to form an Abox.</span></p>
+                        <aside class="notes">This is the first necessary condition for perceptual output to be used with </aside>
+                    </section>
+
+                    <section>
+                        <h3>Necessary Condition 2:</h3>
+                        <h5>Provenance Included</h5>
+                        <p>Prior work (McGuinness and Pinheiro 2004, Ribeiro et Al 2016) argues that trust is critical for the deployment of perceptual and reasoning models alike. In fact certain reasoning systems rely on explanations in order to reach conclusions (Bonacina 2017). <span class="fragment">As such I propose to build on previous work in machine learning explainability to capture an increased amount of provenance for a perceptual model's prediction.</span></p>
                         <aside class="notes">Doing so will facilitate the use of the model's output with a reasoning system.</aside>
                     </section>
                 </section><!-- Intro Nest -->
@@ -193,7 +198,7 @@
                         <div style="background:#3F3F31;border-radius:25px;position:absolute;right:-100px;width:400px;font-size:0.75em;">
                             <h3 style="color:#fff">Scene Graph Generation</h3>
                             <hr>
-                            <p>Scene graphs, proposed in johnson2015, offer a way to structure information from an image. <span class="fragment">A scene graph is a graph describing an image. Nodes can be objects or attributes. Edges are relationships between nodes.</span></p>
+                            <p>Scene graphs, proposed in (Johnson et Al 2015), offer a way to structure information from an image. <span class="fragment">A scene graph is a graph describing an image. Nodes can be objects or attributes. Edges are relationships between nodes.</span></p>
                             <!-- Change Image -->
                             <img src="images/motg_scene_graph.jpg"/>
                         </div>
@@ -203,7 +208,7 @@
                     <section>
                         <h2>Why Scene Graphs?</h2>
                         <ul>
-                            <li>Ease of Representation</li>
+                            <li>Natural Representation</li>
                             <li>Clear Structure</li>
                             <li>Links Different Image Portions Together</li>
                             <li>Can Include Attributes and Relations</li>
@@ -217,76 +222,80 @@
                         <aside class="notes">__</aside>
                     </section>
 
-                    <!-- Change Image -->
                     <section>
                         <h2>No Attributes</h2>
                         <p>Some models do not generate a type of triple called attributes.</p>
                         <div style="position:relative; width:640px; height:410px; margin:0 auto;">
-                            <img src="images/motg_scene_graph.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-205px;"/>
-                            <img class="fragment" src="images/motg_scene_graph_without_attributes.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-205px;"/>
+                            <img src="images/motg_scene_graph.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-310px;"/>
+                            <img class="fragment" src="images/motg_scene_graph_without_attributes.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-310px;"/>
                         </div>
+                        <p><small>Scene graph with and without attributes.</small></p>
                         <aside class="notes">Our inference example presented earlier (about finding the mother of the groom) would not be possible without using attributes (i.e to determine that the groom is wearing white but the person he's dancing with is not).</aside>
                     </section>
 
                     <section>
                         <h2>Triples Only</h2>
                         <p>Some models only generate triples, and do not construct a graph. Further, this may be compounded with not producing attributes.</p>
-                        <img src="images/triples_only.jpg"/>
+                        <img style="height:350px" src="images/triples_only.jpg"/>
+                        <p><small>A collection of triples alone.</small></p>
                         <aside class="notes">Without the graph be properly structured, it's impossible to disambiguate objects with the same label.</aside>
                     </section>
 
                     <section>
-                        <h2>Bounding Boxes Required</h2>
+                        <h3>Bounding Boxes Required</h3>
                         <p>Some models add a bounding box regression term to their loss functions.</p>
-                        <img src="images/bbox_example.jpg"/>
+                        <img style="height:350px" src="images/bbox_example.jpg"/>
+                        <p><small>Example of a predicted and ground truth bounding box.</small></p>
                         <aside class="notes">Relying on bounding box information might not seem like such a big deal if the improvements in accuracy are very good. However, even with improvements in accuracy, realistically reliance on bounding boxes leads to reliance on a small set of training datasets since collecting large amounts of such data is time consuming and expensive. It then becomes easy to fall into the trap of beating a single dataset to death rather than evaluating on a wide range of data.</aside>
                     </section>
 
                     <section>
                         <h2>Overcoming Limitations</h2>
-                        <p>With a method capable of generating <i>proper</i> scene graphs <i>with attributes</i> and <i>without using bounding boxes</i>, it would be possible to enable attribute based reasoning (mother of the groom) and construct datasets more easily. Towards the latter, there are natural language techniques for creating scene graphs from captions \citespice.</p>
+                        <p>With a method capable of generating <i>proper</i> scene graphs <i>with attributes</i> and <i>without using bounding boxes</i>, it would be possible to enable attribute based reasoning (mother of the groom) and construct datasets more easily. Towards the latter, there are natural language techniques for creating scene graphs from captions (Anderson et Al 2016).</p>
                         <aside class="notes">Clearly there are some advantages to overcoming the issues that previous work has.</aside>
                     </section>
 
                     <section>
                         <h2>My Work</h2>
-                        <p>cite klawonn2018, my work, proposes to overcome each of the outlined issues of prior work through various techniques.</p>
+                        <p>(Klawonn and Heim), my work, proposes to overcome each of the outlined issues of prior work through various techniques.</p>
                         <aside class="notes">Everything I've talked about so far is prior work. What follows is a discussion of my work.</aside>
                     </section>
 
                     <section>
                         <h2>Generating Attributes</h2>
                         <img src="images/need_for_stochasticity.jpg" />
+                        <p><small>Stochasticity allows for multiple outputs per input.</small></p>
                         <aside class="notes">In order to generate attributes, a model must have some kind of stochasticity, since there can be multiple attributes associated with the same input.<aside>
                     </section>
 
-                    <!-- Change Image -->
                     <section>
                         <h2>Replacing Bounding Boxes</h2>
                         <h6>Which woman/man is it referring to?</h6>
-                        <img src="images/need_for_attention.jpg" />
+                        <img style="height:350px" src="images/need_for_attention.jpg" />
+                        <p><small>Triples cannot be made into a graph without reconciling objects.</small></p>
                         <aside class="notes">There's a potential problem with this approach, however, as illustrated by this picture. If our generator generates the triples shown, we need a way of determining if those two "person" nodes are referring to the same person or different people.</aside>
                     </section>
 
                     <section>
                         <h2>Solution: Attention</h2>
-                        <p>Attention, proposed in xushow2015, spatially grounds predictions in the input image.</p>
+                        <p>Attention, proposed in (Xu et al 2015), spatially grounds predictions in the input image.</p>
                         <img src="images/attention_over_time.jpg.png" />
-                        <p><small>Image courtesy of (Xu et al) 2015</small><p>
+                        <p><small>Image courtesy of (Xu et al 2015)</small><p>
                         <aside class="notes">Here we have a visual representation of attention, where the light areas of the picture indicate what area of the image the model was looking at to generate the corresponding word. Knowing which area of the image was used to produce which word can help to resolve ambiguities.</aside>
                     </section>
 
-                    <!-- Change Image -->
                     <section>
                         <h2>Bottom Up Approach</h2>
                         <p>Producing a graph in a single prediction step seems difficult given the outlined requirements. Is it possible to learn to predict triples and construct a graph?</p>
-                        <img src="images/bottom_up_approach.jpg" />
+                        <img style="height:350px" src="images/bottom_up_approach.jpg" />
+                        <p><small>Going from triples to a graph.</small></p>
                         <aside class="notes">With these requirements, predicting an entire graph all at once seems like it would be difficult. For example, generating attributes will add a number of extra nodes to the graph. Also, without bounding boxes to regress some region proposal or attention mechanism, it would likely be difficult to train a model to predict all of them at once. The outlined requirements suggest learning to generate individual triples first, then constructing them into a graph.</aside>
                     </section>
 
                     <section>
                         <h2>Training Setup</h2>
                         <img src="images/generating_triples_adversarial_architecture.png" />
+                        <p><small>Approach of (Klawonn and Heim)</small></p>
                         <aside class="notes">Therefore, when we incorporate attention into our generator, with each portion of each triple we have an associated attention vector telling us what portion of the image was used to generate that word. This will help us with graph construction. The full setup is then as follows. Train the generator and discriminator. Then when predicting a graph, have the generator predict some triples. Get the discriminator's score for these triples, and if the triple's score is not above some threshold, throw it away. Then construct the graph with the remaining triples, resolving objects via the attention mechanism.</aside>
                     </section>
 
@@ -297,9 +306,10 @@
                     </section>
 
                     <section>
-                        <h2>Results: Evaluation Dataset</h2>
-                        <p>The first results follow exactly the split of Xu et Al, which has a vocabulary containing 50 relations and 150 objects. <span class="fragment">Note that this split does not contain attributes.</span></p>
+                        <h3>Results: Evaluation Dataset</h3>
+                        <p>The first results follow exactly the split of (Xu et Al 2017), which has a vocabulary containing 50 relations and 150 objects. <span class="fragment">Note that this split does not contain attributes.</span></p>
                         <img src="images/visual_genome.jpg" />
+                        <p><small>Visual Genome Logo</small></p>
                         <aside class="notes">This split uses the visual genome dataset, which contains over 100k training images paired with scene graphs.</aside>
                     </section>
 
@@ -319,7 +329,7 @@
                             <tbody>
 
                                 <tr class="fragment highlight-green">
-                                    <td>Klawonn et Al 2018</td>
+                                    <td>(Klawonn and Heim 2018)</td>
                                     <td>Triples to Graph</td>
                                     <td>No</td>
                                     <td>Yes</td>
@@ -328,7 +338,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Lu et Al 2016</td>
+                                    <td>(Lu et Al 2016)</td>
                                     <td>Visual Model, Language Priors</td>
                                     <td class="fragment highlight-green">No</td>
                                     <td class="fragment highlight-red">No</td>
@@ -338,7 +348,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Xang et Al 2017</td>
+                                    <td>(Xang et Al 2017)</td>
                                     <td>"Parallel Pairwise Recurrent Fully Convolutional Networks"</td>
                                     <td class="fragment highlight-red">Yes</td>
                                     <td class="fragment highlight-red">No</td>
@@ -347,7 +357,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Xu et Al 2017</td>
+                                    <td>(Xu et Al 2017)</td>
                                     <td>Iterative Message Passing</td>
                                     <td class="fragment highlight-red">Yes</td>
                                     <td class="fragment highlight-red">No</td>
@@ -377,7 +387,7 @@
                             <tbody>
 
                                 <tr>
-                                    <td>Klawonn et Al 2018</td>
+                                    <td>(Klawonn and Heim 2018)</td>
                                     <td>Triples to Graph</td>
                                     <td class="fragment highlight-green">No</td>
                                     <td class="fragment highlight-green">Yes</td>
@@ -386,7 +396,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Li et Al 2017</td>
+                                    <td>(Li et Al 2017)</td>
                                     <td>Objects, Phrases, and Region Captions</td>
                                     <td class="fragment highlight-red">Yes</td>
                                     <td class="fragment highlight-red">No</td>
@@ -395,7 +405,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Newell et Al 2017</td>
+                                    <td>(Newell et Al 2017)</td>
                                     <td>Associative Embeddings</td>
                                     <td class="fragment highlight-red">Yes</td>
                                     <td class="fragment highlight-red">No</td>
@@ -414,17 +424,17 @@
                         <aside class="notes">One of the ways to improve is have two separate generators, one for attributes and one for relations.</aside>
                     </section>
 
-                    <!-- Change Image -->
                     <section>
                         <h2>Example without Attributes</h2>
                         <img src="images/scene_graph_example_without_attributes.png" />
+                        <p><small>Example scene graph without attributes.</small></p>
                         <aside class="notes">In all the examples I'll show, the generated scene graphs were limited to under 10 triples to keep things interpretable.</aside>
                     </section>
 
-                    <!-- Change Image -->
                     <section>
                         <h2>Example with Attributes</h2>
                         <img src="images/scene_graph_example_with_attributes.png" />
+                        <p><small>Example scene graph with attributes.</small></p>
                         <aside class="notes">__</aside>
                     </section>
 
@@ -441,6 +451,7 @@
                     <section>
                         <h2>Bridging the Gap</h2>
                         <img src="images/bridging_the_gap_2.png"/>
+                        <p><small>Scene graphs partially bridge the gap.</small></p>
                         <aside class="notes">With the ability to generate scene graphs as I have described, we're a little closer to being able to reason over the content of images. The graph based representation will form the basis of any reasoning task.</aside>
                     </section>
 
@@ -475,122 +486,171 @@
 
                     <section>
                         <h2>The Need for Provenance</h2>
-                        <p>Prior work (e.g mcguinness2004explaining) argues that the key to trust is understanding. In order to trust the conclusions made by a reasoning system, they must be explained in such a way that they can be understood.</p>
+                        <p>Prior work, e.g (McGuinness and Pinheiro 2004), argues that the key to trust is understanding. In order to trust the conclusions made by a reasoning system, they must be explained in such a way that they can be understood. <span class="fragment">Further, some reasoning systems, e.g conflict driven reasoners, would significantly benefit from explanations of certain predictions.</span></p>
                         <aside class="notes">There is a lot of previous work that supports this argument, please see the formal writeup for more references.</aside>
                     </section>
 
                     <section>
                         <h2>Without Provenance</h2>
-                        <img src="images/explaining_conclusions_1.jpg" />
+                        <img style="height:500px" src="images/explaining_conclusions_1.jpg" />
+                        <p><small>Explaining predictions without provenance for the generating model.</small></p>
                         <aside class="notes">This diagram shows how far one could go in explaining the conclusions of a reasoning system were the reasoning system not given any information about how the graph was generated, aside from maybe a reference to the agent. Note that it doesn't capture anything about how the input graph was generated.</aside>
                     </section>
 
                     <section>
-                        <h2>Previous ML Provenance</h2>
-                        <p>The majority of prior work cite cite cite chooses to explain predictions by illustrating what features were important to the model. <span class="fragment">They tend not to say, however, what those features are, i.e assign semantics to them.</span></p>
-                        <img src="images/lime_example.png" />
-                        <p><small>From ribeiro2016</small></p>
+                        <h3>Current ML Provenance</h3>
+                        <p>The majority of prior work (Ribeiro et Al 2016, Yosinksi et Al 2015) chooses to explain predictions by illustrating what features were important to the model. <span class="fragment">They tend not to say, however, what those features are, i.e assign semantics to them.</span></p>
+                        <img style="height:250px" src="images/lime_example.png" />
+                        <p><small>Approach of (Ribeiro et Al 2016)</small></p>
                         <aside class="notes">Deep learning explanation methods are almost exclusively limited to pointing to specific features which were important for a prediction.</aside>
                     </section>
 
                     <section>
-                        <h2>Feature Importance as Provenance</h2>
-                        <img src="images/explaining_conclusions_2.jpg" />
+                        <h3>Feature Importance as Provenance</h3>
+                        <img style="height:450px" src="images/explaining_conclusions_2.jpg" />
+                        <p><small>Explaining with visualizations.</small></p>
                         <aside class="notes">This gives more information, but would still require a human in the loop to verify that it makes sense.</aside>
                     </section>
 
                     <section>
                         <h2>Need for Symbolic Provenance</h2>
-                        <p>Symbolic provenance:</p>
+                        <p>Symbolic provenance, i.e provenance represented by symbols from some taxonomy (natural language, ontologies, etc):</p>
                         <ul>
                             <li>Is queryable</li>
                             <li>Is usable by non-human agents</li>
-                            <li>Could give more insight into the model than a visual explanation alone</li>
+                            <li>Offers more information than a visual explanation alone</li>
                         </ul>
                         <aside class="notes">In order to enable an autonomous agent to make a decision based on some reasoning, it would be very important to have the provenance be usable by a non human agent.</aside>
                     </section>
 
-                    <!-- Change Image -->
                     <section>
-                        <h2>Using Attributes as Provenance</h2>
-                        <p>It may be possible to use the attributes of a scene graph as provenance. However these are still being generated by a black box.</p>
-                        <img src="images/explaining_conclusions_3.jpg" />
-                        <aside class="notes">If the thing generating the provennace in itself isn't verifiably "trustworthy" the provenance isn't really trustworthy. It would be bettr to have a more transparent means of analyzing the deep model.</aside>
+                        <h3>Using Attributes as Provenance</h3>
+                        <img style="height:450px" src="images/explaining_conclusions_3.jpg" />
+                        <p><small>Explaining using attributes.</small></p>
+                        <aside class="notes">It may be possible to use the attributes of a scene graph as provenance. However, these are still being generated by a black box. If the thing generating the provennace in itself isn't verifiably "trustworthy" the provenance isn't really trustworthy. It would be bettr to have a more transparent means of analyzing the deep model.</aside>
                     </section>
 
                     <section>
-                        <h2>Analyzing Deep Models</h2>
+                        <h3>Desirable Characteristics of Provenance Capturing</h3>
+                        <ul>
+                            <li>Symbolic Provenance</li>
+                            <li>No Black Boxes</li>
+                            <li>Must Work for Deep Models</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Deep Models and Human Recognizable Features</h3>
                         <div style="position:relative; width:640px; height:410px; margin:0 auto;">
                             <img src="images/deep_learning_learn_features.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-305px;"/>
                             <!-- Altered version with boxes outlining that the features are learned -->
                             <img class="fragment" src="images/DL_Features.png" height="400" style="position:absolute;top:0;left:50%;margin-left:-305px;"/>
                         </div>
                         <aside class="notes">It's been empirically shown (via visualizations) that sometimes a deep model's activations correspond to human recognizable featurs. We need a way to examine the structure of the internal deep model graph and see if we can map activations/weights to features.</aside>
-                        <p><small>Image courtesy of <a href="http://www.slideshare.net/roelofp/python-for-image-understanding-deep-learning-with-convolutional-neural-nets">here</a></small></p>
+                        <p><small>Image courtesy of <a href="http://www.slideshare.net/roelofp/python-for-image-understanding-deep-learning-with-convolutional-neural-nets">Roelof Peters</a></small></p>
                     </section>
 
                     <section>
                         <h2>Analyzing Deep Models</h2>
-                        <p>We would like some way of analyzing nodes and groups of nodes to see if some of them map to human recognizable features.</p>
+                        <p>We would like some way of analyzing nodes and groups of nodes to see if some of them map to human recognizable features. <span class="fragment">Learning a direct mapping from neuron activations to human recognizable features may be tricky because many features in deep models are clearly not human recognizable.</span></p>
+                        <aside class="notes">We're looking to generate symbolic provenance</aside>
                     </section>
 
                     <section>
-                        <h2>Using Spectral Graph Theory</h2>
+                        <h2>Using Graph Fourier Transforms</h2>
+                        <p>Graph Fourier Tranforms:</p>
                         <ul>
-                            <li>Deep networks are graphs</li>
-                            <li>Graph laplacians measure local changes in node values (discreet second derivative operator)</li>
-                            <li>Laplacian eigenvectors and eigenvalues have been shown to capture graph properties (see, e.g cite cite cite)</li>
+                            <li>Decompose the signal on a particular node in terms of eigenvectors and eigenvalues (graph spectra)</li>
+                            <li>Offer a means of filtering out low frequency features of the graph</li>
+                            <li>May allow for cleaner mapping from neuron activations to recognizable features</li>
                         </ul>
-                        <aside class="notes">Spectral graph theory is analagous to Fourier analysis on a function over a graph. As such the basis defined by the eigenvectors of a laplacian might yield information about the features within the graph.</aside>
                     </section>
 
                     <section>
-                        <h2>Proposed Workflow</h2>
+                        <h3>From GFT to Human Recognizable Features</h3>
                         <ul>
-                            <li>Train a deep network</li>
-                            <li>Forward pass over a pair of images with only one feature in common</li>
-                            <li>Compute Laplacian</li>
-                            <li>Find common eigenvectors</li>
-                            <li>Create a training example (eiegenvector-feature pair)</li> 
+                            <li>Train a deep network on a dataset where inputs have attributes</li>
+                            <li>Compute GFT</li>
+                            <li>Filter undesirable eigenvectors</li>
+                            <li>Compute Inverse GFT for penultimate Layer</li>
+                            <li>Create attribute-activation pair, where activations are the filtered penultimate activations</li>
                         </ul>
-                        <aside class="notes">What will determine whether this works or not is how human interpretable the features of a deep network actually are. I.e, do the features map well to those features which humans assign to a particular object.</aside>
+                        <aside class="notes">We are interested in the penultimate layer of a neural network because it will in theory have the highest level features. The learning problem (mapping filtered activations to attributes) is by definition a multilabel learning problem, since the attribute vector will have multiple attributes. We use attributes because as discussed before, human recognizable features are usually attributes or components of their inputs.</aside>
                     </section>
 
                     <section>
-                        <h2>Potential Evaluation</h2>
-                        <p>There are a few ways to potentially evaluate this mapping from eigenvectors to features.</p>
+                        <h2>Success Relies On ...</h2>
                         <ul>
-                            <li>Eigenvector-feature pair accuracy</li>
-                            <li>Recall and precision (all eigenvectors to all listed recognizable features)</li>
-                            <li>Separating classes of images using spectra (better sparation, better representation)</li>
+                            <li>Deep models must learn some human recognizable features</li>
+                            <li>Spectra of deep models must accurately measure learned features</li>
+                            <li>A filter must be well defined to remove non-human features</li>
                         </ul>
+                    </section>
+
+                    <section>
+                        <h3>Current Implementation Details</h3>
+                        <ul>
+                            <li>The deep model we analyze is a CNN with 3 convolutional layers and 2 f.c layers</li>
+                            <li>I use multilabel KNN to map from activations to attribute vectors (K=5)</li>
+                            <li>A little under 6300 train and test images each</li>
+                            <li>64 named attributes</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Creating a Baseline</h2>
+                        <p>Because we are interested in comparing to how well the filtered version of neuron activations maps to attributes, the obvious comparison is to the unfiltered version, i.e the neuron activations prior to filtering.</p>
+                    </section>
+
+                    <section>
+                        <h2>Evaluation</h2>
+                        <p>I currently use recall and precision to evaluate the performance of my model, in addition to qualitative analysis. <span class="fragment">I could also use embedding visualization techniques and/or clustering to see how well images separate with their filtered activations.</span></p>
                         <aside class="notes">Pretty self explanatory</aside>
                     </section>
 
                     <section>
-                        <h2>Proof of Concept</h2>
-                        <p>Slide showing how this approach works so far</p>
-                        <aside class="notes">__</aside>
+                        <h2>Preliminary Results</h2>
+                        <table style="font-size:30px">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Unfiltered</th>
+                                    <th>GFT-Filtered</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Precision</td>
+                                    <td>15.03</td>
+                                    <td>17.41</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Recall</td>
+                                    <td>28.03</td>
+                                    <td>31.60</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <aside class="notes">As you can see the filtered activations seem to make it easier to map to features, both in terms of recall and precision. Recall is higher than precision, which could indicate that the filtering isn't removing enough lower level features that are common across images.</aside>
+                    </section>
+
+                    <section>
+                        <h2>Example Symbolic Provenance</h2>
+                        <img style="height:400px" src="images/example_feature_recognizing.png" />
+                        <p><small>Example attributes as symbolic provenance that were generated using my method.</small></p>
                     </section>
 
                     <section>
                         <h2>Future Experimentation</h2>
-                        <p>This slide will depend on how far I get with proof of concept</p>
-                        <aside class="notes">__</aside>
-                    </section>
-
-                    <section>
-                        <h2>Potential Roadblocks</h2>
                         <ul>
-                            <li>Learned features may not interpretable enough</li>
-                            <li>Deep model graphs may be too similar to be differentiated by spectra</li>
+                            <li>Determine whether or not eigenvectors capture deep features</li>
+                            <li>Try different filters</li>
+                            <li>More datasets and more deep models</li>
+                            <li>Different multilabel learning algorithms</li>
                         </ul>
-                        <aside class="notes">It remains to be seen how well this will actually work.</aside>
-                    </section>
-
-                    <section>
-                        <h2>Other Potential Provenance Generating Methods</h2>
-                        <p>Bonus slide if I have time.</p>
                         <aside class="notes">__</aside>
                     </section>
 
@@ -620,7 +680,7 @@
             
                     <section>
                         <h2>Symbolic Provenance</h2>
-                        <p>Doing enough evaluation on the provenance generation is going to be critical to showing that it works. I will need a variety of models and data to test my laplacian approach, but I believe that there are sufficiently many data sets and model combinations to get a good evaluation.</p>
+                        <p>Doing enough evaluation on the provenance generation is going to be critical for showing that it works. I will need a variety of models and data to test my Fourier transform approach, but I believe that there are sufficiently many data sets and model combinations to get a good evaluation.</p>
                         <aside class="notes">Obviously this is the more underdeveloped aspect of my work so far, so I'm less sure about it's success. That said, scene graph generation still has a ways to go.</aside>
                     </section>
 
@@ -630,20 +690,20 @@
                         <aside class="notes"> How models perform in more limited domains, however remains to be seen. It could be that they're good enough once the vocabulary and types of images have been limited.</aside>
                     </section>
 
-                    <!-- Change Image -->
                     <section>
                         <h2>Stretch Goal: Human-like navigation</h2>
                         <div style="position:relative; width:640px; height:410px; margin:0 auto;">
-                            <img src="images/regular_gps.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-205px;"/>
-                            <img class="fragment" src="images/enhanced_gps.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-205px;"/>
+                            <img src="images/regular_gps.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-300px;"/>
+                            <img class="fragment" src="images/enhanced_gps.jpg" height="400" style="position:absolute;top:0;left:50%;margin-left:-300px;"/>
                         </div>
+                        <p><small>From current navigation to human-like navigation.</small></p>
                         <aside class="notes">Now I'll talk about some tasks that could be accomplished using scene graphs. This figure shows how adding a scene graph could help improve HCI by giving an agent (like a GPS) access to the view of the world that the human sees. This was an actual route that I took and I had a lot of trouble finding my destination due to a lack of signage.</aside>
                     </section>
 
-                    <!-- Change Image -->
                     <section>
-                        <h2>Stretch Goal: Photojournalist Story Summary</h2>
-                        <img src="images/photo_journalist.jpg" />
+                        <h3>Stretch Goal: Photojournalist Story Summary</h3>
+                        <img style="height:400px" src="images/photo_journalist.jpg" />
+                        <p><small>Deducing conclusions of an event from images.</small></p>
                         <aside class="notes">Using scene graphs may also allow a reasoning agent to reconstruct a story from a collection of images.</aside>
                     </section>
 
